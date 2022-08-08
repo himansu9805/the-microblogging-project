@@ -1,0 +1,123 @@
+@mixin simple-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@keyframes background-image-scale {
+  to {
+    transform: scale(1);
+    opacity: 0.1;
+    filter: blur(2.5px);
+  }
+  from {
+    transform: scale(0.85);
+    opacity: 0.05;
+    filter: blur(5px);
+  }
+}
+
+.background-image {
+  margin: 0;
+  background-image: url("../../src/assets/images/home_bg.png");
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  animation-duration: 10s;
+  animation-name: background-image-scale;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+.container-row {
+  @include simple-flex;
+  flex-direction: row;
+  margin: 5% 10% 5% 10%;
+  // border: 1px solid black;
+}
+
+.column {
+  flex: 50%;
+  h1 {
+    padding-right: 20%;
+    font-size: 2.5rem;
+    font-weight: lighter;
+    color: rgba(18, 102, 79, 0.6);
+  }
+}
+
+.sign-up {
+  @include simple-flex;
+  flex-direction: column;
+  .heading {
+    width: 70%;
+    padding: 15px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 1.7rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  .input-field {
+    width: 55%;
+    padding: 12px;
+    border: 3px #307473 solid;
+    border-radius: 10px;
+    margin: 15px;
+    outline-width: 0;
+    font-size: 1rem;
+    color: #307473;
+    font-family: Inter;
+    &::placeholder {
+      font-family: Inter;
+      color: #307473;
+    }
+    &:focus {
+      outline-width: 0px;
+    }
+  }
+  .sign-up-button {
+    margin: 15px;
+    padding: 12px 25px 12px 25px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #307473;
+    color: white;
+    border: none;
+    &:focus {
+      outline-width: 0px;
+    }
+  }
+}
+
+.container-col {
+  @include simple-flex;
+  flex-direction: column;
+  margin: 15px;
+  .text {
+    font-weight: bold;
+  }
+  .link {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #2DC2BD;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+    font-weight: bold;
+    margin: 5px;
+    &:hover {
+      color: #307473;
+      transition: all 0.25s ease-in-out;
+    }
+  }
+}
