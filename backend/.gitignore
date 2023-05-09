@@ -1,0 +1,30 @@
+# Django-related ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py~
+*.swp
+*.bak
+*.log
+*.cache
+
+# Secret keys
+*.env
+
+# Database
+db.sqlite3
+
+# Media files
+media/
+
+# Static files
+staticfiles/
+
+# Virtual environment
+venv/
+
+# Other ignores
+.idea/
+.vscode/
+*.DS_Store
