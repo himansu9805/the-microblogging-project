@@ -33,6 +33,24 @@ button {
   border: none;
   padding: 10px 20px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: $primary-color;
+  color: $text-color;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-danger {
+  border: 2px solid $danger-color;
+  background-color: transparent;
+  color: $text-color;
+}
+
+.btn-danger:hover {
+  background-color: $danger-color;
+  color: $text-color;
 }
 
 blockquote {
