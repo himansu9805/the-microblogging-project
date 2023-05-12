@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from accounts import views
+from rest_framework_simplejwt.views import TokenVerifyView
 
 accounts_router = routers.DefaultRouter()
-accounts_router.register(r'all', views.UserList, 'user_accounts')
-accounts_router.register(r'create', views.UserRegistration, 'user_register')
+accounts_router.register(r'user', views.UserAccountViewSet, 'user_account')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/accounts/', include(accounts_router.urls)),
+    path('api/', include(accounts_router.urls)),
+    path('api/user/get_user/<int:pk>',
+         views.UserAccountViewSet.as_view({'get': 'get_user'}), name='get_user'),
 ]
