@@ -21,9 +21,18 @@ p {
   color: $text-color;
 }
 
-a {
+a,
+span[role="link"] {
   color: $accent-color;
   text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover,
+span[role="link"]:hover {
+  color: $success-color;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
 }
 
 button {

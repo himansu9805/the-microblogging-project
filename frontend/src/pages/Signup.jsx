@@ -5,7 +5,7 @@ import axiosConfig from "../config/axiosConfig";
 import { Error, Success } from "../components/Toasts";
 import { animated, useSpring } from "@react-spring/web";
 
-export default function Signup({ handleBackClick }) {
+export default function Signup({ handleBackClick, handleLoginClick }) {
   const startDate = new Date().setFullYear(new Date().getFullYear() - 18);
 
   const [name, setName] = React.useState("");
@@ -158,6 +158,17 @@ export default function Signup({ handleBackClick }) {
           >
             Back
           </button>
+        </div>
+        <div className="text-center w-full max-w-lg">
+          Already have an account?{" "}
+          <span
+            role="link"
+            tabIndex={0}
+            className="cursor-pointer"
+            onClick={handleLoginClick}
+          >
+            Login here
+          </span>
         </div>
       </form>
     </div>
