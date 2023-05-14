@@ -37,12 +37,19 @@ class UserAccountViewSet(viewsets.ViewSet):
 
     @action(methods=['POST'], detail=False)
     def login(self, request):
-        username = request.data.get('username')
         password = request.data.get('password')
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        if request.data.get('email') != None:
+            email = request.data.get('email')
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            username = request.data.get('username')
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
         if user.check_password(password):
             login(request, user)
             serializer = UserLoginSerializer(user)
