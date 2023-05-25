@@ -1,4 +1,5 @@
 import re
+from tokenize import TokenError
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework import status
@@ -6,7 +7,7 @@ from rest_framework.response import Response
 from django.contrib.auth import login, logout
 from django.shortcuts import get_object_or_404
 from .serializers import UserLoginSerializer, UserSerializer, UserRegistrationSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from rest_framework_simplejwt.views import TokenVerifyView
 from .models import User
 
@@ -55,6 +56,7 @@ class UserAccountViewSet(viewsets.ViewSet):
             serializer = UserLoginSerializer(user)
             refresh = RefreshToken.for_user(user)
             return Response({
+                'user': serializer.data,
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
             }, status=status.HTTP_200_OK)
@@ -66,8 +68,23 @@ class UserAccountViewSet(viewsets.ViewSet):
         logout(request)
         return Response({'success': True})
 
-    @action(methods=['POST'], detail=False)
+    @action(methods=['GET'], detail=False)
     def verify_token(self, request):
+        token = request.META.get('HTTP_AUTHORIZATION').split(' ')[1]
+        try:
+            access = AccessToken(token)
+            if access.verify() is None:
+                return Response(
+                    data={
+                        'user_id': access.payload['user_id'],
+                    },
+                    status=status.HTTP_200_OK
+                )
+        except Exception as e:
+            return Response({'error': "Token is invalid or expired"}, status=status.HTTP_401_UNAUTHORIZED)
+
+    @action(methods=['POST'], detail=False)
+    def verify_token_old(self, request):
         django_request = request._request
         response = TokenVerifyView.as_view()(request=django_request)
         return response
