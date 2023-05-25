@@ -5,14 +5,24 @@ import axiosConfig from "../config/axiosConfig";
 import { Error, Success } from "../components/Toasts";
 import { animated, useSpring } from "@react-spring/web";
 
-export default function Signup({ handleBackClick, handleLoginClick }) {
+interface SignupProps {
+  handleBackClick: () => void;
+  handleLoginClick: () => void;
+}
+
+export const Signup: React.FC<SignupProps> = ({
+  handleBackClick,
+  handleLoginClick,
+}) => {
   const startDate = new Date().setFullYear(new Date().getFullYear() - 18);
 
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [username, setUsername] = React.useState("");
-  const [dateOfBirth, setDateOfBirth] = React.useState({
+  const [dateOfBirth, setDateOfBirth] = React.useState<{
+    startDate: string | null;
+  }>({
     startDate: null,
   });
 
@@ -65,7 +75,7 @@ export default function Signup({ handleBackClick, handleLoginClick }) {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (validateForm()) {
       alert(name + email + password + username + dateOfBirth.startDate);
@@ -93,7 +103,7 @@ export default function Signup({ handleBackClick, handleLoginClick }) {
           >
             <Success
               message={success}
-              setSuccess={setSuccess}
+              setMessage={setSuccess}
               setShow={setShow}
             />
           </animated.div>
@@ -103,11 +113,14 @@ export default function Signup({ handleBackClick, handleLoginClick }) {
             style={animation}
             className="w-full flex flex-col items-center justify-center"
           >
-            <Error message={error} setError={setError} setShow={setShow} />
+            <Error message={error} setMessage={setError} setShow={setShow} />
           </animated.div>
         )}
       </div>
-      <form className="flex flex-col justify-center items-center my-4 gap-4 w-full">
+      <form
+        className="flex flex-col justify-center items-center my-4 gap-4 w-full"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
           className="border-2 border-zinc-900 p-3 rounded-md bg-zinc-800 placeholder-opacity-60 w-full max-w-lg"
@@ -142,13 +155,15 @@ export default function Signup({ handleBackClick, handleLoginClick }) {
           placeholder="Enter your date of birth"
           onFocus={(e) => (e.target.type = "date")}
           max={dayjs(startDate).format("YYYY-MM-DD")}
-          onChange={(e) => setDateOfBirth({ startDate: e.target.value })}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setDateOfBirth({ startDate: e.target.value })
+          }
           autoComplete="off"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
           <button
+            type="submit"
             className=" p-3 px-10 rounded-md uppercase w-full max-w-lg"
-            onClick={handleSubmit}
           >
             Sign Up
           </button>
@@ -173,4 +188,4 @@ export default function Signup({ handleBackClick, handleLoginClick }) {
       </form>
     </div>
   );
-}
+};

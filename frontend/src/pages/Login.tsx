@@ -3,14 +3,26 @@ import React from "react";
 import axiosConfig from "../config/axiosConfig";
 import { Error, Success } from "../components/Toasts";
 import { animated, useSpring } from "@react-spring/web";
+import { UserContext } from "../context/UserContext";
+import { UserContextType } from "../types/UserContext";
 
-export default function Login({ handleBackClick, handleSignUpClick }) {
+interface LoginProps {
+  handleBackClick: () => void;
+  handleSignUpClick: () => void;
+}
+
+export const Login: React.FC<LoginProps> = ({
+  handleBackClick,
+  handleSignUpClick,
+}) => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const [show, setShow] = React.useState(false);
   const [error, setError] = React.useState("");
   const [success, setSuccess] = React.useState("");
+  const userContext = React.useContext(UserContext) as UserContextType;
+  const { setUser } = userContext;
 
   const animation = useSpring({
     to: { opacity: show ? 1 : 0 },
@@ -18,7 +30,7 @@ export default function Login({ handleBackClick, handleSignUpClick }) {
     reset: !show,
   });
 
-  const submitForm = (e) => {
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (username === "" || password === "") {
       alert("Please fill all the fields");
@@ -42,6 +54,7 @@ export default function Login({ handleBackClick, handleSignUpClick }) {
           setError("");
           setShow(true);
           setSuccess("User loggedin successfully");
+          setUser(res.data.user);
         })
         .catch((err) => {
           setSuccess("");
@@ -80,7 +93,7 @@ export default function Login({ handleBackClick, handleSignUpClick }) {
           >
             <Success
               message={success}
-              setSuccess={setSuccess}
+              setMessage={setSuccess}
               setShow={setShow}
             />
           </animated.div>
@@ -90,11 +103,14 @@ export default function Login({ handleBackClick, handleSignUpClick }) {
             style={animation}
             className="w-full flex flex-col items-center justify-center"
           >
-            <Error message={error} setError={setError} setShow={setShow} />
+            <Error message={error} setMessage={setError} setShow={setShow} />
           </animated.div>
         )}
       </div>
-      <form className="flex flex-col justify-center items-center my-4 gap-4 w-full">
+      <form
+        className="flex flex-col justify-center items-center my-4 gap-4 w-full"
+        onSubmit={submitForm}
+      >
         <input
           type="text"
           className="border-2 border-zinc-900 p-3 rounded-md bg-zinc-800 placeholder-opacity-60 w-full max-w-lg"
@@ -114,10 +130,7 @@ export default function Login({ handleBackClick, handleSignUpClick }) {
           <a href="/forgot-password">Forgot Password</a>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
-          <button
-            className=" p-3 px-10 rounded-md uppercase w-full max-w-lg"
-            onClick={submitForm}
-          >
+          <button className="p-3 px-10 rounded-md uppercase w-full max-w-lg">
             Login
           </button>
           <button
@@ -141,4 +154,4 @@ export default function Login({ handleBackClick, handleSignUpClick }) {
       </form>
     </div>
   );
-}
+};

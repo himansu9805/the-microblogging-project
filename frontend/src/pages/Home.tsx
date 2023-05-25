@@ -1,16 +1,16 @@
 import React from "react";
 import { StarryBackground } from "../components/StarsBackground";
-
-import "../assets/styles/home.scss";
-import Signup from "./Signup";
+import { Signup } from "./Signup";
 import { Canvas } from "@react-three/fiber";
 import { useSpring, animated } from "@react-spring/web";
-import Login from "./Login";
+import { Login } from "./Login";
+
+import "../assets/styles/home.scss";
 
 export const Home = () => {
   const [signUpClicked, setSignUpClicked] = React.useState(false);
   const [loginClicked, setLoginClicked] = React.useState(false);
-  const canvasRef = React.useRef();
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
   const handleSignUpClick = () => {
     setLoginClicked(false);

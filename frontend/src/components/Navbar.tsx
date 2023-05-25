@@ -1,7 +1,7 @@
 import React from "react";
-import Logo from "../assets/images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import logo from "../assets/images/logo.png";
 
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -12,7 +12,7 @@ export default function Navbar() {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <div className="flex flex-row items-center">
-              <img src={Logo} alt="Logo" className="h-10 pr-5" />
+              <img src={logo} alt="Logo" className="h-10 pr-5" />
               <div className="hidden md:block text-sm">
                 The
                 <br />
@@ -49,6 +49,12 @@ export default function Navbar() {
   );
 }
 
-const Navitem = (props) => {
-  return <div className="py-1 md:py-0 md:pl-10 cursor-pointer">{props.value}</div>;
+interface NavitemProps {
+  value: string;
+}
+
+const Navitem: React.FC<NavitemProps> = (props) => {
+  return (
+    <div className="py-1 md:py-0 md:pl-10 cursor-pointer">{props.value}</div>
+  );
 };

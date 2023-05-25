@@ -1,6 +1,16 @@
 import React from "react";
 
-export function Success({ message, setSuccess, setShow }) {
+interface ToastProps {
+  message: string;
+  setMessage: (message: string) => void;
+  setShow: (show: boolean) => void;
+}
+
+export const Success: React.FC<ToastProps> = ({
+  message,
+  setMessage,
+  setShow,
+}) => {
   return (
     <div
       id="toast-success"
@@ -30,7 +40,7 @@ export function Success({ message, setSuccess, setShow }) {
         data-dismiss-target="#toast-success"
         aria-label="Close"
         onClick={() => {
-          setSuccess("");
+          setMessage("");
           setShow(false);
         }}
       >
@@ -51,9 +61,13 @@ export function Success({ message, setSuccess, setShow }) {
       </button>
     </div>
   );
-}
+};
 
-export function Error({ message, setError, setShow }) {
+export const Error: React.FC<ToastProps> = ({
+  message,
+  setMessage,
+  setShow,
+}) => {
   return (
     <div
       id="toast-error"
@@ -83,7 +97,7 @@ export function Error({ message, setError, setShow }) {
         data-dismiss-target="#toast-error"
         aria-label="Close"
         onClick={() => {
-          setError("");
+          setMessage("");
           setShow(false);
         }}
       >
@@ -104,4 +118,4 @@ export function Error({ message, setError, setShow }) {
       </button>
     </div>
   );
-}
+};

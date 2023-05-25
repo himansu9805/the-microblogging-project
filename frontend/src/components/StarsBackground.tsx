@@ -2,21 +2,27 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Stars } from "@react-three/drei";
 
-export function StarryBackground({ animate }) {
-  const starryBackgroundRef = useRef();
+interface StarryBackgroundProps {
+  animate: boolean;
+}
+
+export const StarryBackground: React.FC<StarryBackgroundProps> = ({
+  animate,
+}) => {
+  const starryBackgroundRef = useRef<THREE.Group>();
 
   useFrame(({ clock }) => {
     if (animate) {
       // Move the stars in a straight line along the z-axis
-      starryBackgroundRef.current.position.z =
+      starryBackgroundRef.current!.position.z =
         -1000 + Math.sign(clock.elapsedTime) * 100;
       // Rotate the stars around the y-axis to create a twisting effect
-      starryBackgroundRef.current.rotation.y += 0.005;
+      starryBackgroundRef.current!.rotation.y += 0.005;
     } else {
       // Rotate the stars around the y-axis at a slower rate
-      starryBackgroundRef.current.position.z =
+      starryBackgroundRef.current!.position.z =
         -1000 + Math.sign(clock.elapsedTime) * 100;
-      starryBackgroundRef.current.rotation.y += 0.001;
+      starryBackgroundRef.current!.rotation.y += 0.001;
     }
   });
 
@@ -31,4 +37,4 @@ export function StarryBackground({ animate }) {
       fade
     />
   );
-}
+};
