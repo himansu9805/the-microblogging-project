@@ -4,7 +4,9 @@
 body {
   background-color: $background-color;
   color: $text-color;
-  font-family: $body-font;
+  font-family: "ProximaNova", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 h1,
@@ -13,7 +15,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $heading-font;
+  font-family: "ProximaNova", sans-serif;
+  font-weight: 700;
+  font-style: normal;
   color: $accent-color;
 }
 
@@ -36,7 +40,9 @@ span[role="link"]:hover {
 }
 
 button {
-  font-family: $button-font;
+  font-family: "ProximaNova", sans-serif;
+  font-weight: 500;
+  font-style: normal;
   color: $text-color;
   background-color: $accent-color;
   border: none;
@@ -63,14 +69,18 @@ button:hover {
 }
 
 blockquote {
-  font-family: $quote-font;
+  font-family: "ProximaNova", sans-serif;
+  font-weight: 400;
+  font-style: italic;
   color: $secondary-color;
   border-left: 5px solid $accent-color;
   padding-left: 10px;
 }
 
 nav {
-  font-family: $nav-font;
+  font-family: "ProximaNova", sans-serif;
+  font-weight: 400;
+  font-style: normal;
   color: $text-color;
   padding: 10px;
   display: flex;
@@ -88,7 +98,9 @@ nav a:last-child {
 }
 
 nav button {
-  font-family: $button-font;
+  font-family: "ProximaNova", sans-serif;
+  font-weight: 500;
+  font-style: normal;
   color: $text-color;
   background-color: $accent-color;
   border: none;
