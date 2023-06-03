@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import axiosConfig from "../config/axiosConfig";
-import { Error, Success } from "../components/Toasts";
-import { animated, useSpring } from "@react-spring/web";
-import { UserContext } from "../context/UserContext";
-import { UserContextType } from "../types/UserContext";
+import axiosConfig from '../config/axiosConfig';
+import { Error, Success } from '../components/Toasts';
+import { animated, useSpring } from '@react-spring/web';
+import { UserContext } from '../context/UserContext';
+import { UserContextType } from '../types/UserContext';
 
 interface LoginProps {
   handleBackClick: () => void;
@@ -15,12 +15,12 @@ export const Login: React.FC<LoginProps> = ({
   handleBackClick,
   handleSignUpClick,
 }) => {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const [show, setShow] = React.useState(false);
-  const [error, setError] = React.useState("");
-  const [success, setSuccess] = React.useState("");
+  const [error, setError] = React.useState('');
+  const [success, setSuccess] = React.useState('');
   const userContext = React.useContext(UserContext) as UserContextType;
   const { setUser } = userContext;
 
@@ -32,11 +32,11 @@ export const Login: React.FC<LoginProps> = ({
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (username === "" || password === "") {
-      alert("Please fill all the fields");
+    if (username === '' || password === '') {
+      alert('Please fill all the fields');
       return false;
     } else {
-      var loginObject;
+      let loginObject;
       if (username.match(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
         loginObject = {
           email: username,
@@ -49,15 +49,15 @@ export const Login: React.FC<LoginProps> = ({
         };
       }
       axiosConfig
-        .post("/user/login/", loginObject)
+        .post('/user/login/', loginObject)
         .then((res) => {
-          setError("");
+          setError('');
           setShow(true);
-          setSuccess("User loggedin successfully");
+          setSuccess('User loggedin successfully');
           setUser(res.data.user);
         })
         .catch((err) => {
-          setSuccess("");
+          setSuccess('');
           setShow(true);
           setError(
             err.response.data[Object.keys(err.response.data)[0]]
@@ -65,18 +65,17 @@ export const Login: React.FC<LoginProps> = ({
               .toUpperCase() +
               err.response.data[Object.keys(err.response.data)[0]]
                 .toString()
-                .slice(1)
+                .slice(1),
           );
         });
     }
   };
 
   React.useEffect(() => {
-    console.log("Login.jsx: useEffect: show: ", show);
     setTimeout(() => {
       setShow(false);
-      setSuccess("");
-      setError("");
+      setSuccess('');
+      setError('');
     }, 10000);
   }, [show]);
 
@@ -126,7 +125,7 @@ export const Login: React.FC<LoginProps> = ({
           autoComplete="off"
         />
         <div className="text-right w-full max-w-lg">
-          Don't remember your password?{" "}
+          Don't remember your password?{' '}
           <a href="/forgot-password">Forgot Password</a>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-lg">
@@ -141,7 +140,7 @@ export const Login: React.FC<LoginProps> = ({
           </button>
         </div>
         <div className="text-center w-full max-w-lg">
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <span
             role="link"
             tabIndex={0}

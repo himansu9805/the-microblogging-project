@@ -1,9 +1,9 @@
-import React from "react";
-import dayjs from "dayjs";
+import React from 'react';
+import dayjs from 'dayjs';
 
-import axiosConfig from "../config/axiosConfig";
-import { Error, Success } from "../components/Toasts";
-import { animated, useSpring } from "@react-spring/web";
+import axiosConfig from '../config/axiosConfig';
+import { Error, Success } from '../components/Toasts';
+import { animated, useSpring } from '@react-spring/web';
 
 interface SignupProps {
   handleBackClick: () => void;
@@ -16,10 +16,10 @@ export const Signup: React.FC<SignupProps> = ({
 }) => {
   const startDate = new Date().setFullYear(new Date().getFullYear() - 18);
 
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [username, setUsername] = React.useState("");
+  const [name, setName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = React.useState('');
   const [dateOfBirth, setDateOfBirth] = React.useState<{
     startDate: string | null;
   }>({
@@ -27,8 +27,8 @@ export const Signup: React.FC<SignupProps> = ({
   });
 
   const [show, setShow] = React.useState(false);
-  const [error, setError] = React.useState("");
-  const [success, setSuccess] = React.useState("");
+  const [error, setError] = React.useState('');
+  const [success, setSuccess] = React.useState('');
 
   const animation = useSpring({
     to: { opacity: show ? 1 : 0 },
@@ -38,17 +38,17 @@ export const Signup: React.FC<SignupProps> = ({
 
   const validateForm = () => {
     if (
-      name === "" ||
-      email === "" ||
-      password === "" ||
-      username === "" ||
+      name === '' ||
+      email === '' ||
+      password === '' ||
+      username === '' ||
       dateOfBirth.startDate === null
     ) {
-      alert("Please fill all the fields");
+      alert('Please fill all the fields');
       return false;
     } else {
       axiosConfig
-        .post("/user/register/", {
+        .post('/user/register/', {
           name: name,
           email: email,
           password: password,
@@ -56,12 +56,12 @@ export const Signup: React.FC<SignupProps> = ({
           date_of_birth: dateOfBirth.startDate,
         })
         .then((res) => {
-          setError("");
+          setError('');
           setShow(true);
-          setSuccess("User registered successfully");
+          setSuccess('User registered successfully');
         })
         .catch((err) => {
-          setSuccess("");
+          setSuccess('');
           setShow(true);
           setError(
             err.response.data[Object.keys(err.response.data)[0]]
@@ -69,7 +69,7 @@ export const Signup: React.FC<SignupProps> = ({
               .toUpperCase() +
               err.response.data[Object.keys(err.response.data)[0]]
                 .toString()
-                .slice(1)
+                .slice(1),
           );
         });
     }
@@ -85,8 +85,8 @@ export const Signup: React.FC<SignupProps> = ({
   React.useEffect(() => {
     setTimeout(() => {
       setShow(false);
-      setSuccess("");
-      setError("");
+      setSuccess('');
+      setError('');
     }, 10000);
   }, [show]);
 
@@ -153,8 +153,8 @@ export const Signup: React.FC<SignupProps> = ({
           type="text"
           className="border-2 border-zinc-900 p-3 rounded-md bg-zinc-800 placeholder-opacity-60 w-full max-w-lg"
           placeholder="Enter your date of birth"
-          onFocus={(e) => (e.target.type = "date")}
-          max={dayjs(startDate).format("YYYY-MM-DD")}
+          onFocus={(e) => (e.target.type = 'date')}
+          max={dayjs(startDate).format('YYYY-MM-DD')}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setDateOfBirth({ startDate: e.target.value })
           }
@@ -175,7 +175,7 @@ export const Signup: React.FC<SignupProps> = ({
           </button>
         </div>
         <div className="text-center w-full max-w-lg">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <span
             role="link"
             tabIndex={0}

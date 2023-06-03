@@ -1,11 +1,11 @@
-import React from "react";
-import { StarryBackground } from "../components/StarsBackground";
-import { Signup } from "./Signup";
-import { Canvas } from "@react-three/fiber";
-import { useSpring, animated } from "@react-spring/web";
-import { Login } from "./Login";
+import React from 'react';
+import { StarryBackground } from '../components/StarsBackground';
+import { Signup } from './Signup';
+import { Canvas } from '@react-three/fiber';
+import { useSpring, animated } from '@react-spring/web';
+import { Login } from './Login';
 
-import "../assets/styles/home.scss";
+import '../assets/styles/home.scss';
 
 export const Home = () => {
   const [signUpClicked, setSignUpClicked] = React.useState(false);
@@ -29,13 +29,13 @@ export const Home = () => {
 
   const signUpComponentAnimation = useSpring({
     opacity: signUpClicked ? 1 : 0,
-    transform: `translate(${signUpClicked ? "0px, 0px" : "-50px, 0px"})`,
+    transform: `translate(${signUpClicked ? '0px, 0px' : '-50px, 0px'})`,
     config: { tension: 100, friction: 20 },
   });
 
   const loginComponentAnimation = useSpring({
     opacity: loginClicked ? 1 : 0,
-    transform: `translate(${loginClicked ? "0px, 0px" : "-50px, 0px"})`,
+    transform: `translate(${loginClicked ? '0px, 0px' : '-50px, 0px'})`,
     config: { tension: 100, friction: 20 },
   });
 
@@ -48,7 +48,7 @@ export const Home = () => {
     <div className="flex flex-col my-0 md:my-4 items-center">
       <Canvas
         style={{
-          position: "fixed",
+          position: 'fixed',
           top: 0,
           left: 0,
           right: 0,
@@ -60,7 +60,7 @@ export const Home = () => {
         }}
         ref={canvasRef}
       >
-        <StarryBackground animate={signUpClicked} />
+        <StarryBackground animate={signUpClicked || loginClicked} />
         <perspectiveCamera
           fov={45}
           aspect={window.innerWidth / window.innerHeight}

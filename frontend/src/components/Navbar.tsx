@@ -1,7 +1,18 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-import logo from "../assets/images/logo.png";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import logo from '../assets/images/logo.png';
+
+interface NavitemProps {
+  value: string;
+}
+
+const Navitem: React.FC<NavitemProps> = (props) => {
+  return (
+    <div className="py-1 md:py-0 md:pl-10 cursor-pointer">{props.value}</div>
+  );
+};
+
 
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -33,14 +44,14 @@ export default function Navbar() {
           </div>
           <div
             className={
-              "lg:flex flex-grow justify-center md:justify-end items-center" +
-              (navbarOpen ? " flex" : " hidden")
+              'lg:flex flex-grow justify-center md:justify-end items-center' +
+              (navbarOpen ? ' flex' : ' hidden')
             }
             id="example-navbar-danger"
           >
             <div className="flex md:flex-row mt-5 flex-col justify-end items-center">
-              <Navitem value={"Home"} />
-              <Navitem value={"About"} />
+              <Navitem value={'Home'} />
+              <Navitem value={'About'} />
             </div>
           </div>
         </div>
@@ -48,13 +59,3 @@ export default function Navbar() {
     </>
   );
 }
-
-interface NavitemProps {
-  value: string;
-}
-
-const Navitem: React.FC<NavitemProps> = (props) => {
-  return (
-    <div className="py-1 md:py-0 md:pl-10 cursor-pointer">{props.value}</div>
-  );
-};

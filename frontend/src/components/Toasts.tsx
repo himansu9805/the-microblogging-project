@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ToastProps {
   message: string;
@@ -40,7 +40,7 @@ export const Success: React.FC<ToastProps> = ({
         data-dismiss-target="#toast-success"
         aria-label="Close"
         onClick={() => {
-          setMessage("");
+          setMessage('');
           setShow(false);
         }}
       >
@@ -97,7 +97,7 @@ export const Error: React.FC<ToastProps> = ({
         data-dismiss-target="#toast-error"
         aria-label="Close"
         onClick={() => {
-          setMessage("");
+          setMessage('');
           setShow(false);
         }}
       >

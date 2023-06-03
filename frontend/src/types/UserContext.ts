@@ -1,4 +1,4 @@
-import { User } from "../types/User";
+import { User } from '../types/User';
 
 export interface UserContextType {
   user: User | null;
