@@ -146,7 +146,7 @@ const Toolbar = () => {
         />
       </button>
 
-      <span className="w-[1px] bg-gray-600 block h-full"></span>
+      {/* <span className="w-[1px] bg-gray-600 block h-full"></span>
 
       <button
         onClick={() => {
@@ -161,7 +161,7 @@ const Toolbar = () => {
         }}
       >
         <FontAwesomeIcon icon={faRedo} className="text-white w-3.5 h-3.5" />
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -236,7 +236,7 @@ export const Editor = () => {
         <div className="w-full flex justify-between items-center px-4">
           <Toolbar />
           <button
-            className="text-white font-bold my-4 py-2 px-4 rounded-lg"
+            className="feed-post-button text-white font-bold my-4 py-2 px-4 rounded-lg"
             onClick={handlePost}
           >
             POST

@@ -1,9 +1,18 @@
 @import "color-scheme.scss";
 @import "fonts.scss";
 
+:root {
+  --color-page-background: #{$bg-dark-1};
+  --color-text: #{$text-color};
+  --color-accent: #{$deep-ocean};
+  --color-success: #{$emerald};
+  --color-danger: #{$danger-color};
+  --color-secondary: #{$very-dark-blue};
+}
+
 body {
-  background-color: $background-color;
-  color: $text-color;
+  background-color: var(--color-page-background);
+  color: var(--color-text);
   font-family: "ProximaNova", sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -18,7 +27,7 @@ h6 {
   font-family: "ProximaNova", sans-serif;
   font-weight: 700;
   font-style: normal;
-  color: $accent-color;
+  color: var(--color-accent);
 }
 
 p {
@@ -27,14 +36,14 @@ p {
 
 a,
 span[role="link"] {
-  color: $accent-color;
+  color: var(--color-accent);
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
 
 a:hover,
 span[role="link"]:hover {
-  color: $success-color;
+  color: var(--color-success);
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
@@ -43,8 +52,8 @@ button {
   font-family: "ProximaNova", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: $text-color;
-  background-color: $accent-color;
+  color: var(--color-text);
+  background-color: var(--color-accent);
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -52,28 +61,28 @@ button {
 }
 
 button:hover {
-  background-color: $primary-color;
-  color: $text-color;
+  background-color: var(--color-secondary);
+  color: var(--color-text);
   transition: all 0.3s ease-in-out;
 }
 
 .btn-danger {
-  border: 2px solid $danger-color;
+  border: 2px solid var(--color-danger);
   background-color: transparent;
-  color: $text-color;
+  color: var(--color-text);
 }
 
 .btn-danger:hover {
-  background-color: $danger-color;
-  color: $text-color;
+  background-color: var(--color-danger);
+  color: var(--color-text);
 }
 
 blockquote {
   font-family: "ProximaNova", sans-serif;
   font-weight: 400;
   font-style: italic;
-  color: $secondary-color;
-  border-left: 5px solid $accent-color;
+  color: var(--color-text);
+  border-left: 5px solid var(--color-accent);
   padding-left: 10px;
 }
 
@@ -81,7 +90,7 @@ nav {
   font-family: "ProximaNova", sans-serif;
   font-weight: 400;
   font-style: normal;
-  color: $text-color;
+  color: var(--color-text);
   padding: 10px;
   display: flex;
   justify-content: space-between;
@@ -89,7 +98,7 @@ nav {
 }
 
 nav a {
-  color: $text-color;
+  color: var(--color-text);
   margin-right: 20px;
 }
 
@@ -101,16 +110,16 @@ nav button {
   font-family: "ProximaNova", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: $text-color;
-  background-color: $accent-color;
+  color: var(--color-text);
+  background-color: var(--color-accent);
   border: none;
   padding: 10px 20px;
   cursor: pointer;
 }
 
 .success {
-  background-color: $success-color;
-  color: $background-color;
+  background-color: var(--color-success);
+  color: var(--color-page-background);
 }
 
 input {
@@ -137,4 +146,8 @@ input {
 
 .date-rounded-md {
   border-radius: 0.375rem;
+}
+
+.border-accent {
+  border-color: var(--color-accent);
 }

@@ -74,9 +74,11 @@ class UserAccountViewSet(viewsets.ViewSet):
         try:
             access = AccessToken(token)
             if access.verify() is None:
+                user = User.objects.get(id=access.payload['user_id'])
+                serializer = UserLoginSerializer(user)
                 return Response(
                     data={
-                        'user_id': access.payload['user_id'],
+                        'user': serializer.data,
                     },
                     status=status.HTTP_200_OK
                 )

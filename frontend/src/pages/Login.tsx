@@ -55,6 +55,7 @@ export const Login: React.FC<LoginProps> = ({
           setShow(true);
           setSuccess('User loggedin successfully');
           setUser(res.data.user);
+          localStorage.setItem('access-token', res.data.access);
         })
         .catch((err) => {
           setSuccess('');

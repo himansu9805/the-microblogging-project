@@ -12,6 +12,9 @@ export const Home = () => {
   const [loginClicked, setLoginClicked] = React.useState(false);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
 
+  // eslint-disable-next-line no-console
+  console.log('sadhfugsghjdfjghadsfhj');
+
   const handleSignUpClick = () => {
     setLoginClicked(false);
     setSignUpClicked(true);
